@@ -36,9 +36,12 @@ The project is organized as follows:
   
 ## Usecase Covered
 1. List Hotel bookings based on UserId
-2. Create Hotel Bookings
-3. Populate hotels in Dropdown
-
+   Based on userId fetch bookings and append hotels details in it
+3. Create Hotel Bookings
+   Pass the data from from to api side
+   Append the data in json
+5. Populate hotels in Select Dropdown
+   
 ## Screenshot:
 ![image](https://github.com/user-attachments/assets/acab25ed-0f55-47f7-9772-838da6a9d601)
 ![image](https://github.com/user-attachments/assets/0b3e69f7-050d-4a2d-bbec-bab92385b340)
