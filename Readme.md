@@ -33,3 +33,15 @@ The project is organized as follows:
    - Creates a new booking.
    - **Request Body**: Booking data (e.g., user details, booking dates, etc.)
    - **Response**: A success message indicating the booking has been created.
+  
+## Usecase Covered
+1. List Hotel bookings based on UserId
+2. Create Hotel Bookings
+3. Populate hotels in Dropdown
+
+## Screenshot:
+![image](https://github.com/user-attachments/assets/acab25ed-0f55-47f7-9772-838da6a9d601)
+![image](https://github.com/user-attachments/assets/0b3e69f7-050d-4a2d-bbec-bab92385b340)
+
+
+
