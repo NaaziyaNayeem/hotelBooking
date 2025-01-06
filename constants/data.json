@@ -1,0 +1,82 @@
+{
+  "hotels": [
+    {
+      "id": 1,
+      "name": "Hotel 1",
+      "location": "London"
+    },
+    {
+      "id": 2,
+      "name": "Hotel 2",
+      "location": "New York"
+    },
+    {
+      "id": 3,
+      "name": "Hotel 3",
+      "location": "India"
+    },
+    {
+      "id": 4,
+      "name": "Hotel 4",
+      "location": "Canada"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Naaziya"
+    }
+  ],
+  "hotelBookings": [
+    {
+      "id": 1,
+      "status": "BOOKED",
+      "createdDate": "2024-12-02",
+      "rooms": 2,
+      "checkInDate": "2025-01-01",
+      "checkOutDate": "2025-01-04",
+      "userId": 1,
+      "hotelId": 1
+    },
+    {
+      "id": 2,
+      "status": "BOOKED",
+      "createdDate": "2024-12-15",
+      "rooms": 1,
+      "checkInDate": "2025-01-12",
+      "checkOutDate": "2025-01-14",
+      "userId": 1,
+      "hotelId": 3
+    },
+    {
+      "status": "BOOKED",
+      "createdDate": "2025-01-06T18:12:54.850Z",
+      "rooms": "2",
+      "checkInDate": "2025-01-28",
+      "checkOutDate": "2025-01-30",
+      "userId": 1,
+      "hotelId": 1,
+      "id": 3
+    },
+    {
+      "status": "BOOKED",
+      "createdDate": "2025-01-06T18:17:17.803Z",
+      "rooms": "3",
+      "checkInDate": "2025-01-15",
+      "checkOutDate": "2025-01-23",
+      "userId": 1,
+      "hotelId": 1,
+      "id": 4
+    },
+    {
+      "status": "BOOKED",
+      "createdDate": "2025-01-06T18:19:34.963Z",
+      "rooms": "9",
+      "checkInDate": "2025-01-29",
+      "checkOutDate": "2025-01-30",
+      "userId": 1,
+      "hotelId": "4",
+      "id": 5
+    }
+  ]
+}
