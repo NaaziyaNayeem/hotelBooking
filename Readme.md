@@ -22,7 +22,7 @@ The project is organized as follows:
   - `index.html` - Front-end HTML file
   - `script.js` - Js file
 - `routes/`
-  - `bookingRoutes.js` - Routes for handling booking API requests
+  - `booking.js` - Routes for handling booking API requests
   - `hotel.js` - Routes for handling hotel API requests
 - `server.js` - Main server file to start the application
 
