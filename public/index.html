@@ -1,5 +1,6 @@
 <html>
 <title>Hotel Bookings</title>
+<script src="./script.js"></script>
 
 <body>
     <style>
@@ -28,8 +29,12 @@
             width: 40%;
             float: right;
         }
+
+        .showOrHide {
+            display: none;
+        }
     </style>
-    <h1>Hotel Booking</h1>
+    <h1 style="text-align: center;">Hotel Booking</h1>
     <br><br>
     <div class="booking-container">
         <div id="bookings">
@@ -44,130 +49,50 @@
                         <th>Checked Out Date</th>
                         <th>Rooms</th>
                         <th>Status</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody id="bookingDetails">
-
+                    <tr id="noBookings" style="text-align: center;">
+                        <td colspan="9">No booking created</td>
+                    </tr>
                 </tbody>
             </table>
+
         </div>
         <div id="createDiv">
-            <b>Create Bookings</b>
-            <form id="bookingdForm">
+            <h3>Booking</h3>
+            <form id="bookingForm">
 
                 <label>Hotel:</label>
-                <select id="myHotels">
-                    <option value="" id="hotelName" name="hotelName">Select hotel</option>
+
+                <input type="number" id="booking_id" name="booking_id" class="showOrHide">
+                <input type="text" id="booking_hotel_status" name="booking_status" class="showOrHide">
+                <input type="text" id="formType" name="formType" class="showOrHide">
+                <input type="date" id="booking_hotel_created_date" name="booking_created_date" class="showOrHide">
+
+                <select id="booking_hotel">
+                    <option value="" id="booking_hotel_name" name="booking_hotel_name">Select hotel</option>
                 </select>
                 <br><br>
 
                 <label>Rooms:</label>
-                <input type="number" id="hotelRoom" name="hotelRoom" required>
+                <input type="number" id="booking_hotel_room" name="booking_hotel_room" required>
                 <br><br>
 
                 <label>Check In Date:</label>
-                <input type="date" id="checkInDate" name="checkInDate" required>
+                <input type="date" id="booking_hotel_checkInDate" name="booking_hotel_checkInDate" required>
                 <br><br>
 
                 <label>Check Out Date:</label>
-                <input type="date" id="checkOutDate" name="checkOutDate" required>
+                <input type="date" id="booking_hotel_checkOutDate" name="booking_hotel_checkOutDate" required>
                 <br><br>
 
-                <button type="submit">Create</button>
+                <button id="bookingFormLabel" type="submit">Create</button>
+                <div id="formMsg" style="display: none;"></div>
             </form>
         </div>
     </div>
-
 </body>
-
-<script>
-    var totalBookings = 0;
-    async function fetchHotelBookings() {
-        try {
-            const response = await fetch('/api/hotelBookings/1');
-            if (response.ok) {
-                const hotelBookings = await response.json();
-                const bookingDetails = document.getElementById('bookingDetails');
-
-                const bookingRows = bookingDetails.getElementsByTagName('tr');
-                while (bookingRows.length > 1) {
-                    bookingDetails.deleteRow(1);
-                }
-                totalBookings = hotelBookings.length;
-
-                hotelBookings.forEach(bookings => {
-                    const bookingRow = document.createElement('tr');
-                    bookingRow.innerHTML = `
-                    <td>${bookings.id}</td>
-                    <td>${bookings.createdDate}</td>
-                    <td>${bookings.hotel[0].name}</td>
-                    <td>${bookings.hotel[0].location}</td>
-                    <td>${bookings.checkInDate}</td>
-                    <td>${bookings.checkOutDate}</td>
-                    <td>${bookings.rooms}</td>
-                    <td class="${bookings.status}">${bookings.status}</td>
-                    `;
-                    bookingDetails.appendChild(bookingRow);
-                });
-            } else {
-                console.error('Failed to fetch hotelBookings');
-            }
-        } catch (error) {
-            console.error('Error fetching hotelBookings:', error);
-        }
-    }
-
-    async function fetchHotels() {
-        try {
-            const response = await fetch('/api/hotels');
-            if (response.ok) {
-                const hotels = await response.json();
-                const hotelSelect = document.getElementById('myHotels');
-                hotels.forEach(item => {
-                    const option = document.createElement('option');
-                    option.value = item.id;
-                    option.textContent = item.name;
-                    hotelSelect.appendChild(option);
-                });
-            } else {
-                console.error('Failed to fetch hotels');
-            }
-        } catch (error) {
-            console.error('Error fetching hotels:', error);
-        }
-    }
-
-    // add bookings
-    document.getElementById('bookingdForm').addEventListener('submit', async function (event) {
-        event.preventDefault();
-        const bookingData = {
-            "id": totalBookings + 1,
-            "status": "BOOKED",
-            "createdDate": new Date(),
-            "rooms": document.getElementById('hotelRoom').value,
-            "checkInDate": document.getElementById('checkInDate').value,
-            "checkOutDate": document.getElementById('checkOutDate').value,
-            "userId": 1,
-            "hotelId": document.getElementById('myHotels').value
-        }
-        const response = await fetch('/api/createBookings', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'  // Add this header
-            },
-            body: JSON.stringify(bookingData)
-        });
-        if (response.ok) {
-            console.log('Added');
-        } else {
-            console.error('Failed to fetch hotelBookings');
-        }
-    });
-
-    window.onload = function () {
-        fetchHotelBookings();
-        fetchHotels();
-    };
-</script>
 
 </html>
