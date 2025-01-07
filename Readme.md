@@ -8,9 +8,9 @@ A simple hotel booking application built with the NodeJS framework.
 - **Database**: Stored data in json format
 - **Style**: Used CSS
 - **Node Packages**:
-  - **Express**: A minimal and flexible Node.js web application framework.
-  - **fs**: Node's file system module, used for file operations.
-  - **path**: Module for handling and transforming file paths.
+  - **Express**: Used for server logic
+  - **fs**: Used for updating the json when we add/edit/cancel the bookings
+  - **path**: Used for transforming file paths.
 
 ## File Structure
 
@@ -59,8 +59,35 @@ The project is organized as follows:
 8. Update the table with the modified booking details without page refresh.
    
 ## Screenshot:
-![image](https://github.com/user-attachments/assets/acab25ed-0f55-47f7-9772-838da6a9d601)
-![image](https://github.com/user-attachments/assets/0b3e69f7-050d-4a2d-bbec-bab92385b340)
+1. Inital Screen
+![image](https://github.com/user-attachments/assets/d25a93c1-a5f7-4674-ae50-e9a7e02f0df8)
+
+2. Populate Hotels data from API in Select Drop Down
+![image](https://github.com/user-attachments/assets/3fb137c0-1991-48e5-9231-f32d3d890bd1)
+
+3. Display error before submit
+![image](https://github.com/user-attachments/assets/7c873581-02a4-4b4b-8c0b-a637112dbd6e)
+
+4. After creating the booking
+![image](https://github.com/user-attachments/assets/3152e5f9-1e2e-46fc-80ec-6856af1d6f89)
+
+5. After booking get cancelled
+![image](https://github.com/user-attachments/assets/df9b1d2e-1502-47a3-b583-e2aaac08cc11)
+
+6. New Booking
+![image](https://github.com/user-attachments/assets/8ac134c4-a417-47dc-8b69-fd36bb8f4d90)
+
+7. Pre-Populate the form when we click edit in any row
+![image](https://github.com/user-attachments/assets/071544a0-5fea-448a-b44a-004bc3f2b5e0)
+
+8. After editing  the booking
+![image](https://github.com/user-attachments/assets/e5b3bffd-4833-4b4d-919e-0277261fb445)
+
+
+
+
+
+
 
 
 
