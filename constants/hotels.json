@@ -1,0 +1,24 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Hotel 1",
+      "location": "London"
+    },
+    {
+      "id": 2,
+      "name": "Hotel 2",
+      "location": "New York"
+    },
+    {
+      "id": 3,
+      "name": "Hotel 3",
+      "location": "India"
+    },
+    {
+      "id": 4,
+      "name": "Hotel 4",
+      "location": "Canada"
+    }
+  ]
+}

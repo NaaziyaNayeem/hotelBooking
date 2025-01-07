@@ -1,10 +1,6 @@
 <html>
 <title>Hotel Bookings</title>
 
-<head>
-
-</head>
-
 <body>
     <style>
         table,
@@ -85,7 +81,7 @@
 </body>
 
 <script>
-    // list bookings
+    var totalBookings = 0;
     async function fetchHotelBookings() {
         try {
             const response = await fetch('/api/hotelBookings/1');
@@ -97,6 +93,7 @@
                 while (bookingRows.length > 1) {
                     bookingDetails.deleteRow(1);
                 }
+                totalBookings = hotelBookings.length;
 
                 hotelBookings.forEach(bookings => {
                     const bookingRow = document.createElement('tr');
@@ -120,10 +117,31 @@
         }
     }
 
+    async function fetchHotels() {
+        try {
+            const response = await fetch('/api/hotels');
+            if (response.ok) {
+                const hotels = await response.json();
+                const hotelSelect = document.getElementById('myHotels');
+                hotels.forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item.id;
+                    option.textContent = item.name;
+                    hotelSelect.appendChild(option);
+                });
+            } else {
+                console.error('Failed to fetch hotels');
+            }
+        } catch (error) {
+            console.error('Error fetching hotels:', error);
+        }
+    }
+
     // add bookings
     document.getElementById('bookingdForm').addEventListener('submit', async function (event) {
         event.preventDefault();
         const bookingData = {
+            "id": totalBookings + 1,
             "status": "BOOKED",
             "createdDate": new Date(),
             "rooms": document.getElementById('hotelRoom').value,
@@ -132,7 +150,6 @@
             "userId": 1,
             "hotelId": document.getElementById('myHotels').value
         }
-        console.log('data', bookingData)
         const response = await fetch('/api/createBookings', {
             method: 'POST',
             headers: {
@@ -147,39 +164,10 @@
         }
     });
 
-    window.onload = fetchHotelBookings;
-
-
-    const hotels = [
-        {
-            "id": 1,
-            "name": "Hotel 1",
-            "location": "London"
-        },
-        {
-            "id": 2,
-            "name": "Hotel 2",
-            "location": "New York"
-        },
-        {
-            "id": 3,
-            "name": "Hotel 3",
-            "location": "India"
-        },
-        {
-            "id": 4,
-            "name": "Hotel 4",
-            "location": "Canada"
-        }
-    ]
-    const hotelSelect = document.getElementById('myHotels');
-
-    hotels.forEach(item => {
-        const option = document.createElement('option');
-        option.value = item.id;
-        option.textContent = item.name;
-        hotelSelect.appendChild(option);
-    });
+    window.onload = function () {
+        fetchHotelBookings();
+        fetchHotels();
+    };
 </script>
 
 </html>

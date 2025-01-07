@@ -2,8 +2,10 @@ const express = require('express');
 const router = express.Router();
 const fs = require('fs');
 
-const data = require('../constants/data.json');
-const filePath = 'constants/data.json';
+const hotel_bookings_data = require('../constants/hotel_bookings.json');
+const hotels_data = require('../constants/hotels.json');
+
+const hotel_bookings_file_path = 'constants/hotel_bookings.json';
 
 router.use(express.json());
 
@@ -15,14 +17,14 @@ router.get('/api/hotelBookings/:userId', (req, res) => {
     if (!userId) {
         res.status(422).json({ message: "UserId is Required" })
     }
-    const hotelBookings = data.hotelBookings;
-    const hotels = data.hotels;
+    const hotelBookings = hotel_bookings_data.data;
+    const hotels = hotels_data.data;
 
     const userHotelBookings = hotelBookings.filter((val) => val.userId == userId)
         .map((bookings) => {
             return {
                 ...bookings,
-                hotel: hotels.filter((h) => h.id === bookings.hotelId)
+                hotel: hotels.filter((h) => h.id == bookings.hotelId)
             }
         });
     res.json(userHotelBookings);
@@ -30,26 +32,27 @@ router.get('/api/hotelBookings/:userId', (req, res) => {
 
 router.post('/api/createBookings', (req, res) => {
     const body = req.body;
-    fs.readFile(filePath, 'utf8', (err, data) => {
+    let jsonData = hotel_bookings_data.data;
+    jsonData.push(body);
+    fs.writeFile(hotel_bookings_file_path, JSON.stringify(jsonData, null, 2), (err) => {
         if (err) {
-            console.error("Error:", err);
-            return;
+            console.error("Error writing to file:", err);
+            return res.status(400).send("Server error while writing to file");;
+        } else {
+            console.log("Added successfully!");
+            return res.status(200).send({
+                data: body
+            });
         }
-
-        let jsonData = JSON.parse(data);
-        body.id = jsonData.hotelBookings.length + 1;
-        jsonData.hotelBookings.push(body);
-
-        fs.writeFile(filePath, JSON.stringify(jsonData, null, 2), (err) => {
-            if (err) {
-                console.error("Error writing to file:", err);
-                return res.status(400).send("Server error while writing to file");;
-            } else {
-                console.log("Added successfully!");
-                return res.status(200).send("Booking created successfully");;
-            }
-        });
     });
+});
+
+/*
+ * Hotels 
+ */
+router.get('/api/hotels', (req, res) => {
+    const hotels = hotels_data.data;
+    res.json(hotels);
 });
 
 module.exports = router;
