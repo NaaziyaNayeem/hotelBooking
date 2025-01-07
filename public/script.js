@@ -39,7 +39,7 @@ function newBookingRow(booking) {
 function displayMsg(msg, status) {
     var formMsgElement = document.getElementById('formMsg');
     formMsgElement.textContent = msg;
-    if (status == 'ERRROR') {
+    if (status == 'ERROR') {
         formMsgElement.style.color = 'red';
     } else {
         formMsgElement.style.color = 'green';
